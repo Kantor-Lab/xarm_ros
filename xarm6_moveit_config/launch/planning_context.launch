@@ -6,6 +6,10 @@
   <!-- The name of the parameter under which the URDF is loaded -->
   <arg name="robot_description" default="robot_description"/>
   
+  <arg name="attach_to" default="world"/>
+  <arg name="xyz" default="'0 0 0'"/>
+  <arg name="rpy" default="'0 0 0'"/>
+
   <arg name="add_other_geometry" default="false"/>
   <arg name="geometry_type" default="box"/>
   <arg name="geometry_mass" default="0.1"/>
@@ -24,6 +28,9 @@
     command="xacro --inorder  '$(find xarm_description)/urdf/xarm6_robot.urdf.xacro' limited:=true
       model1300:=$(arg model1300)
       add_other_geometry:=$(arg add_other_geometry)
+      attach_to:=$(arg attach_to) 
+      xyz:=$(arg xyz) 
+      rpy:=$(arg rpy) 
       geometry_type:=$(arg geometry_type)
       geometry_mass:=$(arg geometry_mass)
       geometry_height:=$(arg geometry_height)

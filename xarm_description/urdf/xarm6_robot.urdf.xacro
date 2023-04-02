@@ -5,6 +5,9 @@
   <xacro:arg name="limited" default="false"/>
   <xacro:arg name="effort_control" default="false"/>
   <xacro:arg name="velocity_control" default="false"/>
+  <xacro:arg name="attach_to" default="world"/>
+  <xacro:arg name="xyz" default="0 0 0"/>
+  <xacro:arg name="rpy" default="0 0 0"/>
 
   <xacro:arg name="add_other_geometry" default="false"/>
   <xacro:arg name="geometry_type" default="box"/>
@@ -26,6 +29,9 @@
   <xacro:include filename="$(find xarm_description)/urdf/xarm6_robot_macro.xacro" />
   <xacro:xarm6_robot prefix="$(arg prefix)" namespace="$(arg ros_namespace)" limited="$(arg limited)" 
     effort_control="$(arg effort_control)" velocity_control="$(arg velocity_control)"
+    attach_to="$(arg attach_to)" 
+    xyz="$(arg xyz)" 
+    rpy="$(arg rpy)" 
     rs_d435i="$(arg add_realsense_d435i)"
     model1300="$(arg model1300)"
     add_other_geometry="$(arg add_other_geometry)" 

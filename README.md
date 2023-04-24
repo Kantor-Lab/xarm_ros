@@ -1,14 +1,14 @@
 # xArm_Amiga_CMU
 
 # Setup
-Simple. Mainly Gazebo and MoveIt package installation required. Then clone this repository in your `catkin_ws/src` and then `catkin_make`. Additional instructions can be found in the original [xarm_ros repository](https://github.com/xArm-Developer/xarm_ros#3-preparations-before-using-this-package) 
+Mainly Gazebo and MoveIt package installation required. Then clone this repository in your `catkin_ws/src` and then `catkin_make`. To install everything related to the xArm, follow the instructions of the original [xarm_ros repository](https://github.com/xArm-Developer/xarm_ros#3-preparations-before-using-this-package) 
 
 ## Create Amiga model in Gazebo
 1. Move model directory to gazebo directory 
 ```
 cd ~/.gazebo/models
 mkdir amiga
-cd ~/catkin_ws/src/xArm_Amiga_CMU/xarm_gazebo/models
+cd ~/catkin_ws/src/xarm_ros/xarm_gazebo/models
 cp -dir amiga/ ~/.gazebo/models/
 ```
 
@@ -55,9 +55,9 @@ Manually move the EE in MoveIt GUI and press `Plan & Execute` to move the robot.
 
 
 3. (A) Python Script for desired Motion using ROS service to MoveGroup Interface
-
-<strong>TODO: Currently, this launch setup does not work with the python script `xArm_planar_motion.py` as it did above. Needs to be resolved to work with MoveGroup script interface.</strong> </br>
-
+```
+python xArm_planar_motion.py
+```
 
 3. (B) Checking MoveIt planning feasibility with custom end-effector. 
 Run this separately from previous MoveIt file. The previous `xarm6_gripper_moveit_gazebo.launch` is planning with a smaller EE and NOT the custom EE. The `demo_customEE_gazebo.launch` file accounts for the right dimension of the gripp.er
@@ -65,7 +65,6 @@ Run this separately from previous MoveIt file. The previous `xarm6_gripper_movei
 roslaunch xarm6_moveit_config demo_customEE_gazebo.launch 
 ```
 
-<strong>TODO: Currently, this MoveIt launch setup does not work with Gazebo to update the joint angles. Needs to be resolved to work with above Gazebo setup and python script. </strong></br>
 
 
 ![Motion from scripted interface](doc/EE2.png)

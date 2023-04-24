@@ -3,6 +3,20 @@
 # Setup
 Mainly Gazebo and MoveIt package installation required. Then clone this repository in your `catkin_ws/src` and then `catkin_make`. To install everything related to the xArm, follow the instructions of the original [xarm_ros repository](https://github.com/xArm-Developer/xarm_ros#3-preparations-before-using-this-package) 
 
+You may have this error when trying to compile:
+```console
+CMake Error at xarm_ros/xarm_sdk/CMakeLists.txt:28 (message):
+  xarm_sdk contains sub-modules, Please use the following command to get or
+  update the sub-module code first
+```
+To compile, just update the xarm_sdk dependencies:
+```
+    $ git pull
+    $ git submodule sync
+    $ git submodule update --init --remote
+
+```
+
 ## Create Amiga model in Gazebo
 1. Move model directory to gazebo directory 
 ```

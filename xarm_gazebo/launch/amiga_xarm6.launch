@@ -8,13 +8,15 @@
   <arg name="attach_to" default="world"/>
   <arg name="xyz" default="'0.3 0 0.8382'"/>
   <arg name="rpy" default="'0 3.1417 3.1417'"/>
-
+  <!--arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/-->
 
   <rosparam file="$(find xarm6_moveit_config)/config/xarm6_params.yaml" command="load" ns="$(arg namespace)"/>
   <rosparam if="$(arg add_gripper)" file="$(find xarm_controller)/config/gripper_gazebo_ros_control.yaml" command="load"/>
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find amiga_gazebo)/worlds/amiga_xarm.world"/>
+    <arg name="world_name" value="$(find xarm_gazebo)/worlds/amiga_xarm.world"/>
     <arg name="gui" value="$(arg gui)"/>
   </include>
 
@@ -34,13 +36,15 @@
       xyz:=$(arg xyz) 
       rpy:=$(arg rpy)     	
    	  "/>
-
+<!--param name="amiga_description" command="xacro '$(find amiga_cmu_description)/urdf/farm-ng.urdf.xacro'"/-->
 
   <!-- spawn robot model in gazebo, located on the table -->
+  
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
     respawn="false" output="screen"
     args="-urdf -model xarm6 -x 0.0 -y -0.0 -z 0.0 -param robot_description"/>    
     <!--args="-urdf -model xarm6 -x 0.3 -y -0.0 -z 0.8382 -P 3.1417 -Y 3.1417  -param robot_description"/-->
+  <!--node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model farm_ng -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param amiga_description" /-->
 
   <!-- load the corresponding controllers -->
   <include file="$(find xarm_controller)/launch/xarm6_control.launch">

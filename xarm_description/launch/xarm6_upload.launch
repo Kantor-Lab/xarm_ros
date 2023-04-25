@@ -15,5 +15,5 @@
     command="$(find xacro)/xacro
     --inorder '$(find xarm_description)/urdf/$(arg robot_type)6_robot.urdf.xacro'
     limited:=$(arg limited) model1300:=$(arg model1300)" />
-
+  
 </launch>

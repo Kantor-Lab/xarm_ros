@@ -72,6 +72,14 @@ target_link_libraries(xarm_driver_node
   ${catkin_LIBRARIES}
 )
 
+add_executable(xarm_joystick_node src/xarm_joystick_node.cpp)
+add_dependencies(xarm_joystick_node xarm_msgs_generate_messages_cpp)
+target_link_libraries(xarm_joystick_node  xarm_ros_driver ${catkin_LIBRARIES})
+
+add_executable(xarm_joystick_test src/xarm_joystick_test.cpp)
+add_dependencies(xarm_joystick_test xarm_msgs_generate_messages_cpp)
+target_link_libraries(xarm_joystick_test  xarm_ros_driver ${catkin_LIBRARIES})
+
 # set the exec list who link the xarm_sdk library
 set(link_xarm_sdk_exec_list 
   example1_report_norm

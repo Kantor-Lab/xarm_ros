@@ -1,72 +1,39 @@
-# xArm_Amiga_CMU
+# amiga_cmu_description
+This a ROS robot description package for an amiga_robot urdf description
+## Installation
+Install the amiga_robot description (create a PAT token on Github with [this instruction](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token))
 
-# Setup
-Simple. Mainly Gazebo and MoveIt package installation required. Then clone this repository in your `catkin_ws/src` and then `catkin_make`. Additional instructions can be found in the original [xarm_ros repository](https://github.com/xArm-Developer/xarm_ros#3-preparations-before-using-this-package) 
-
-## Create Amiga model in Gazebo
-1. Move model directory to gazebo directory 
 ```
-cd ~/.gazebo/models
-mkdir amiga
-cd ~/catkin_ws/src/xArm_Amiga_CMU/xarm_gazebo/models
-cp -dir amiga/ ~/.gazebo/models/
+cd ~/catkin_ws/src
+git clone -b ruiji https://<User Name>:<TOKEN>@github.com/Kantor-Lab/amiga_cmu_description.git
 ```
-
-# Running without custom End-Effector
-1. Gazebo 
+Install xarm_ros package
 ```
-roslaunch xarm_gazebo amiga_xarm6.launch
-``` 
-Error: No p gain specified for pid.  `Namespace: /xarm/gazebo_ros_control/pid_gains/joint is` expected and can be ignored. </br>
-
-2. MoveIt & xArm_Planner 
+cd ~/catkin_ws/src
+git clone -b corn_insertion https://<User Name>:<TOKEN>@github.com/Kantor-Lab/xarm_ros.git
 ```
-roslaunch xarm6_moveit_config xarm6_moveit_gazebo_plan.launch
+Update the package
+```bash
+   cd ~/catkin_ws/src/xarm_ros
+   git pull
+   git submodule sync
+   git submodule update --init --remote
 ```
-Manually move the EE in MoveIt GUI and press `Plan & Execute` to move the robot. Both RViz and Gazebo robot arm should move.
-
-3. Python Script for desired Motion using ROS service to MoveGroup Interface
-(if first time, make this python script executable)
+Go back to the catkin_ws and do catkin_make
 ```
-~/catkin_ws/src/xArm_Amiga_CMU/xarm_planner/scripts
-chmod +x xArm_planar_motion.py
-python xArm_planar_motion.py
+cd ~/catkin_ws && catkin_make
 ```
-
-![Motion from scripted interface](doc/amiga_script.png)
-
-
-# Running with custom End-Effector
-1. Gazebo 
+## Test the package
+First use this to source the environment
 ```
-roslaunch xarm_gazebo amiga_xarm6.launch add_gripper:=true
-``` 
-Error: No p gain specified for pid.  `Namespace: /xarm/gazebo_ros_control/pid_gains/joint is` expected and can be ignored. </br>
-
-2. MoveIt & xArm_Planner 
+cd ~/catkin_ws 
+source devel/setup.bash
 ```
-roslaunch xarm6_gripper_moveit_config xarm6_gripper_moveit_gazebo.launch
+Check the RVIZ
 ```
-Wait until the terminal prompts `You can start planning now!` message, which means RViz can now take in manual planning requests.
-Manually move the EE in MoveIt GUI and press `Plan & Execute` to move the robot. Both RViz and Gazebo robot arm should move. Can manually drag the EE to be in the configuration shown below </br>
-
-
-![Motion from scripted interface](doc/EE.png)
-
-
-3. (A) Python Script for desired Motion using ROS service to MoveGroup Interface
-
-<strong>TODO: Currently, this launch setup does not work with the python script `xArm_planar_motion.py` as it did above. Needs to be resolved to work with MoveGroup script interface.</strong> </br>
-
-
-3. (B) Checking MoveIt planning feasibility with custom end-effector. 
-Run this separately from previous MoveIt file. The previous `xarm6_gripper_moveit_gazebo.launch` is planning with a smaller EE and NOT the custom EE. The `demo_customEE_gazebo.launch` file accounts for the right dimension of the gripp.er
+roslaunch amiga_cmu_description farm-ng.launch
 ```
-roslaunch xarm6_moveit_config demo_customEE_gazebo.launch 
+Check the gazebo
 ```
-
-<strong>TODO: Currently, this MoveIt launch setup does not work with Gazebo to update the joint angles. Needs to be resolved to work with above Gazebo setup and python script. </strong></br>
-
-
-![Motion from scripted interface](doc/EE2.png)
+roslaunch amiga_cmu_description amiga-gazebo.launch
 

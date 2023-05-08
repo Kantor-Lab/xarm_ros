@@ -13,11 +13,11 @@ cd ~/catkin_ws/src
 git clone -b corn_insertion https://<User Name>:<TOKEN>@github.com/Kantor-Lab/xarm_ros.git
 ```
 Update the package
-```bash
-   cd ~/catkin_ws/src/xarm_ros
-   git pull
-   git submodule sync
-   git submodule update --init --remote
+```
+cd ~/catkin_ws/src/xarm_ros
+git pull
+git submodule sync
+git submodule update --init --remote
 ```
 Go back to the catkin_ws and do catkin_make
 ```
